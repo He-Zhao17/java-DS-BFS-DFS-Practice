@@ -1,5 +1,10 @@
 package binarySearchTrees;
 
+import stacksQueues.ListStack;
+import stacksQueues.QueueImplementation;
+
+import java.util.Stack;
+
 /** Implementation of a binary search tree.
  *  The course has been modified from the code of Prof. Galles.
  */
@@ -25,6 +30,23 @@ class BinarySearchTree {
     /** Return a string that contains values of the nodes, traversed using postorder traversal.
      */
     public String getNodesInPostorder() {
+        ListStack stack = new ListStack();
+        StringBuilder res = new StringBuilder();
+        BSTNode curr = root;
+        BSTNode prev = curr;
+        stack.push(curr);
+        curr = curr.left;
+        while (stack.empty()) {
+            if (curr == null) {
+                BSTNode temp = (BSTNode) stack.pop();
+
+
+            }
+            stack.push(curr);
+            prev = curr;
+            curr = curr.left;
+        }
+
         return getNodesInPostorder(root);
     }
 

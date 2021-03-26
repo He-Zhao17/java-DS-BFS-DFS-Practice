@@ -11,16 +11,30 @@ public class QueueImplementation {
 
     public void enqueue(Object item) {
         // FILL IN CODE
+        stack1.push(item);
     }
 
     public Object dequeue() {
         // FILL IN CODE
-        return null; // change
+        while(!stack1.empty()) {
+            stack2.push(stack1.pop());
+        }
+        if (stack2.empty()) {
+            return null;
+        } else {
+            return stack2.pop();
+        }
+        //return null; // change
     }
 
     public boolean empty() {
         // FILL IN CODE
-        return false; // change
+        if (stack1.empty() && stack2.empty()) {
+            return true;
+        } else {
+            return false;
+        }
+        //return false; // change
     }
 
     public static void main(String[] args) {
