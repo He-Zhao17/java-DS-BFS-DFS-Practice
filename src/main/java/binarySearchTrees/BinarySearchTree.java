@@ -33,17 +33,15 @@ class BinarySearchTree {
         ListStack stack = new ListStack();
         StringBuilder res = new StringBuilder();
         BSTNode curr = root;
-        BSTNode prev = curr;
         stack.push(curr);
         curr = curr.left;
         while (stack.empty()) {
             if (curr == null) {
                 BSTNode temp = (BSTNode) stack.pop();
-
-
+                res.append(temp.data);
+                curr = temp.right;
             }
             stack.push(curr);
-            prev = curr;
             curr = curr.left;
         }
 
