@@ -3,6 +3,8 @@ package binarySearchTrees;
 import stacksQueues.ListStack;
 import stacksQueues.QueueImplementation;
 
+import javax.imageio.plugins.tiff.BaselineTIFFTagSet;
+import java.util.ArrayList;
 import java.util.Stack;
 
 /** Implementation of a binary search tree.
@@ -30,21 +32,6 @@ class BinarySearchTree {
     /** Return a string that contains values of the nodes, traversed using postorder traversal.
      */
     public String getNodesInPostorder() {
-        ListStack stack = new ListStack();
-        StringBuilder res = new StringBuilder();
-        BSTNode curr = root;
-        stack.push(curr);
-        curr = curr.left;
-        while (stack.empty()) {
-            if (curr == null) {
-                BSTNode temp = (BSTNode) stack.pop();
-                res.append(temp.data);
-                curr = temp.right;
-            }
-            stack.push(curr);
-            curr = curr.left;
-        }
-
         return getNodesInPostorder(root);
     }
 
@@ -64,8 +51,22 @@ class BinarySearchTree {
         StringBuilder s = new StringBuilder();
         // FILL IN CODE
         // Must be recursive
-
-        return s.toString();
+        ListStack stack = new ListStack();
+        StringBuilder res = new StringBuilder();
+        BSTNode curr = root;
+        stack.push(curr);
+        curr = curr.left;
+        while (stack.empty()) {
+            if (curr == null) {
+                BSTNode temp = (BSTNode) stack.pop();
+                res.append(temp.data);
+                curr = temp.right;
+            }
+            stack.push(curr);
+            curr = curr.left;
+        }
+        return res.toString();
+        //return s.toString();
     }
 
     /**
@@ -79,8 +80,32 @@ class BinarySearchTree {
      */
     public void makeBalanced() {
         // FILL IN CODE
+        ListStack stack = new ListStack();
+        ArrayList<Character> res = new ArrayList<Character>();
+        BSTNode curr = root;
+        stack.push(curr);
+        curr = curr.left;
+        while (stack.empty()) {
+            if (curr == null) {
+                BSTNode temp = (BSTNode) stack.pop();
+                res.add(temp.data);
+                curr = temp.right;
+            }
+            stack.push(curr);
+            curr = curr.left;
+        }
+
+        root.data =
+
+
+
 
     }
+
+    public BSTNode (ArrayList<Character> arr) {
+        BSTNode res = new BSTNode(arr.get((arr.size() - 1) / 2));
+    }
+
 
 
     /**
