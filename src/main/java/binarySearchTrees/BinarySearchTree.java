@@ -51,21 +51,23 @@ class BinarySearchTree {
         StringBuilder s = new StringBuilder();
         // FILL IN CODE
         // Must be recursive
-        ListStack stack = new ListStack();
-        StringBuilder res = new StringBuilder();
-        BSTNode curr = root;
-        stack.push(curr);
-        curr = curr.left;
-        while (stack.empty()) {
-            if (curr == null) {
-                BSTNode temp = (BSTNode) stack.pop();
-                res.append(temp.data);
-                curr = temp.right;
+        ListStack sta1 = new ListStack();
+        ListStack sta2 = new ListStack();
+        sta1.push(root);
+        while (!sta1.empty()) {
+            root = (BSTNode) sta1.pop();
+            sta2.push(root);
+            if (root.left != null) {
+                sta1.push(root.left);
             }
-            stack.push(curr);
-            curr = curr.left;
+            if (root.right != null) {
+                sta1.push(root.right);
+            }
         }
-        return res.toString();
+        while (!sta2.empty()) {
+            s.append(((BSTNode) sta2.pop()).data);
+        }
+        return s.toString();
         //return s.toString();
     }
 
@@ -81,29 +83,33 @@ class BinarySearchTree {
     public void makeBalanced() {
         // FILL IN CODE
         ListStack stack = new ListStack();
-        ArrayList<Character> res = new ArrayList<Character>();
+        ArrayList<Character> arr = new ArrayList<Character>();
         BSTNode curr = root;
         stack.push(curr);
         curr = curr.left;
-        while (stack.empty()) {
+        while (!stack.empty() || curr != null) {
             if (curr == null) {
                 BSTNode temp = (BSTNode) stack.pop();
-                res.add(temp.data);
+                arr.add(temp.data);
                 curr = temp.right;
+            } else {
+                stack.push(curr);
+                curr = curr.left;
             }
-            stack.push(curr);
-            curr = curr.left;
         }
 
-        root.data =
-
-
-
-
+        root = Partition(arr);
     }
 
-    public BSTNode (ArrayList<Character> arr) {
-        BSTNode res = new BSTNode(arr.get((arr.size() - 1) / 2));
+    public BSTNode Partition(ArrayList<Character> arr) {
+        if (arr.size() == 0) {
+            return null;
+        }
+        int mid = (arr.size() - 1) / 2;
+        BSTNode temp = new BSTNode(arr.get(mid));
+        temp.left = Partition(new ArrayList<Character>(arr.subList(0, mid)));
+        temp.right = Partition(new ArrayList<Character>(arr.subList(mid + 1, arr.size())));
+        return temp;
     }
 
 
